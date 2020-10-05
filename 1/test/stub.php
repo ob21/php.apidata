@@ -1,0 +1,5 @@
+<?
+function stub() {
+  return true;
+} 
+?>

@@ -1,0 +1,38 @@
+## Files
+#
+./ : basic list (list.php), get (get.php), create (create.php), delete (delete.php) 
+./README : this file, explanation of the sources
+./conf/db.php : database name, table and credentials
+./conf/auth.php : authentication function for security, included in operation files
+
+## Usage
+#
+get.php?id=x	=> send a json with the item at index x stored in database, error message otherwise
+
+
+GET list.php	=> send a json with an array of all items stored in database
+{
+  "status": true,
+  "result": [
+    {
+      "id": 1,
+      "type": "note",
+      "value": "{\"key\", \"value\"}"
+    },
+    {
+      "id": 2,
+      "type": "truc",
+      "value": "toto"
+    },
+    {
+      "id": 3,
+      "type": "truc",
+      "value": "toto"
+    }
+  ]
+}
+
+create.php	=> create an item (with default attributes) in database and send the result status (json) with a message and an index
+
+
+delete.php?id=x => delete item with index x in database and send a result status (json)
