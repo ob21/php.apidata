@@ -11,18 +11,39 @@ header("Content-Type: application/json; charset=UTF-8");
 // include database file
 include_once 'conf/db.php';
 
+print_r("POST\n");
+
+echo "<table>";
+    foreach ($_POST as $key => $value) {
+        echo "<tr>";
+        echo "<td>";
+        echo $key;
+        echo "</td>";
+        echo "<td>";
+        echo $value;
+        echo "</td>";
+        echo "</tr>";
+    }
+echo "</table>";
+
 // get id of item from the url
-$type=strval($_GET["type"]);
-$value=strval($_GET["value"]);
+$type=strval(htmlspecialchars($_GET["type"]));
 if(empty($type)) {
-    $data = array();
-    $data["error"] = "type is empty";
-    exit(json_encode($data));
+    $type=strval(htmlspecialchars($POST["type"]));
+    if(empty($type)) {
+       $data = array();
+       $data["error"] = "type is empty";
+       exit(json_encode($data));
+    }
 }
+$value=strval(htmlspecialchars($_GET["value"]));
 if(empty($value)) {
-    $data = array();
-    $data["error"] = "value is empty";
-    $data(json_encode($data));
+    $value=strval(htmlspecialchars($_POST["value"]));
+    if(empty($value)) {
+       $data = array();
+       $data["error"] = "value is empty";
+       exit(json_encode($data));
+    }
 }
 
 // instantiate database and open connection
