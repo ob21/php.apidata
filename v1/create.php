@@ -11,25 +11,21 @@ header("Content-Type: application/json; charset=UTF-8");
 // include database file
 include_once 'conf/db.php';
 
-print_r("POST\n");
-
-echo "<table>";
+//$post = "POST data\n";
+$post = "[";
     foreach ($_POST as $key => $value) {
-        echo "<tr>";
-        echo "<td>";
-        echo $key;
-        echo "</td>";
-        echo "<td>";
-        echo $value;
-        echo "</td>";
-        echo "</tr>";
+        $post .= " ";
+	$post .= $key;
+        $post .= "=";
+        $post .= $value;
     }
-echo "</table>";
+$post .= " ]";
+//echo $post;
 
 // get id of item from the url
 $type=strval(htmlspecialchars($_GET["type"]));
 if(empty($type)) {
-    $type=strval(htmlspecialchars($POST["type"]));
+    $type=strval(htmlspecialchars($_POST["type"]));
     if(empty($type)) {
        $data = array();
        $data["error"] = "type is empty";
@@ -59,7 +55,7 @@ $statement->execute();
 $num = $statement->rowCount();
 
 $data = array();
-$data["result"] = $num." item created";
+$data["result"] = $num." item [type=".$type.",value=".$value."] created";
 echo json_encode($data);
 
 ?>
