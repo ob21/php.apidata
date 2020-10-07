@@ -25,7 +25,7 @@ $post .= " ]";
 // get id of item from the url
 $type=strval(htmlspecialchars($_GET["type"]));
 if(empty($type)) {
-    $type=strval(htmlspecialchars($_POST["type"]));
+    $type=strval($_POST["type"]);
     if(empty($type)) {
        $data = array();
        $data["error"] = "type is empty";
@@ -34,7 +34,7 @@ if(empty($type)) {
 }
 $value=strval(htmlspecialchars($_GET["value"]));
 if(empty($value)) {
-    $value=strval(htmlspecialchars($_POST["value"]));
+    $value=strval($_POST["value"]);
     if(empty($value)) {
        $data = array();
        $data["error"] = "value is empty";
